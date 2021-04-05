@@ -30,6 +30,8 @@ namespace DirRecursive
             var prdFileExtension = prdFile + ".prd.enc";
 
             foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
+
+
         }
         public static class FileUtil
         {
@@ -65,13 +67,14 @@ namespace DirRecursive
                 string prd = Path.GetFileName(file);
                 string targetPath = $@"C:\DATA_ENC\{prd}";
                 File.Copy(file, targetPath);
-                MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
+                listBox1.Items.Add(file);
+                //MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
 
                 System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\DATA_ENC\Log\" + "DownloadedFiles_" + DataAtual.ToString("MMddyyyy") + ".txt", true);
                 string dataimportacao = file + " - Arquivo encontrado e copiado às " + DataAtual.ToString("HH:mm:ss");
                 string savedPathFiles = String.Format(dataimportacao);
                 logFiles.WriteLine(savedPathFiles);
-                logFiles.WriteLine("--------------------------------------------------------------");
+                logFiles.WriteLine("----------------------------------------------------------------------------------------------------------------------------");
                 logFiles.Close();
             }
             else
