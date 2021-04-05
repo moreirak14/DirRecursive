@@ -26,7 +26,7 @@ namespace DirRecursive
                 listBox1.Items.Add(pathProduction);
                 MessageBox.Show("ARQUIVO COPIADO!");*
                }*/
-            var prdFile = "ABCDEFGHIJK123456789";
+            var prdFile = "BMCT5560990504210101";
             var prdFileExtension = prdFile + ".prd.enc";
 
             foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
@@ -60,22 +60,23 @@ namespace DirRecursive
         }
         private void WriteLine(string file)
         {
-            DateTime DataAtual = DateTime.Now;
+            DateTime dateNow = DateTime.Now;
+            string prd = Path.GetFileName(file);
+            string targetPath = $@"C:\DATA_ENC\{prd}";
 
             if (file != null)
             {
-                string prd = Path.GetFileName(file);
-                string targetPath = $@"C:\DATA_ENC\{prd}";
                 File.Copy(file, targetPath);
-                listBox1.Items.Add(file);
                 //MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
 
-                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\DATA_ENC\Log\" + "DownloadedFiles_" + DataAtual.ToString("MMddyyyy") + ".txt", true);
-                string dataimportacao = file + " - Arquivo encontrado e copiado às " + DataAtual.ToString("HH:mm:ss");
-                string savedPathFiles = String.Format(dataimportacao);
+                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\DATA_ENC\Log\" + "FileTransfer_" + dateNow.ToString("MMddyyyy") + ".txt", true);
+                string dataImport = file + " - Arquivo encontrado e copiado às " + dateNow.ToString("HH:mm:ss");
+                string savedPathFiles = String.Format(dataImport);
                 logFiles.WriteLine(savedPathFiles);
                 logFiles.WriteLine("----------------------------------------------------------------------------------------------------------------------------");
                 logFiles.Close();
+
+                listBox1.Items.Add(file);
             }
             else
             {
@@ -86,9 +87,6 @@ namespace DirRecursive
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
         }
         private void label1_Click(object sender, EventArgs e)
         {
