@@ -29,7 +29,7 @@ namespace DirRecursive
             var prdFile = "ABCDEFGHIJK123456789";
             var prdFileExtension = prdFile + ".prd.enc";
 
-            foreach (var file in FileUtil.GetFiles(@"C:\temp\PAYMENT\", prdFileExtension)) WriteLine(file);
+            foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
         }
         public static class FileUtil
         {
@@ -63,12 +63,11 @@ namespace DirRecursive
             if (file != null)
             {
                 string prd = Path.GetFileName(file);
-                string targetPath = @"C:\temp\AUTO_ENC\";
+                string targetPath = $@"C:\DATA_ENC\{prd}";
+                File.Copy(file, targetPath);
+                MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
 
-                File.Copy(prd, targetPath);
-                //MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
-
-                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\temp\ImportProductionFiles\Log\" + "DownloadedFiles_" + DataAtual.ToString("MMddyyyy") + ".txt", true);
+                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\DATA_ENC\Log\" + "DownloadedFiles_" + DataAtual.ToString("MMddyyyy") + ".txt", true);
                 string dataimportacao = file + " - Arquivo encontrado e copiado às " + DataAtual.ToString("HH:mm:ss");
                 string savedPathFiles = String.Format(dataimportacao);
                 logFiles.WriteLine(savedPathFiles);
