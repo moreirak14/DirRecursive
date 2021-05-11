@@ -20,6 +20,7 @@ namespace DirRecursive
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            
             string prdFile = "BMCT5560990504210101";
             string prdFileExtension = prdFile + ".prd.enc";
 
