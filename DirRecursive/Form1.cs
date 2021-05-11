@@ -20,11 +20,20 @@ namespace DirRecursive
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
-            string prdFile = "BMCT5560990504210101";
-            string prdFileExtension = prdFile + ".prd.enc";
 
-            foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
+            int MaxprdFile = 21;
+
+            string prdFile = Console.WriteLine();
+            if (prdFile.Length == MaxprdFile)
+            {
+                string prdFileExtension = prdFile + ".prd.enc";
+                foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
+            }
+
+            //string prdFile = "BMCT5560990504210101";
+            //string prdFileExtension = prdFile + ".prd.enc";
+
+            //foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
         }
         public static class FileUtil
         {
