@@ -21,15 +21,20 @@ namespace DirRecursive
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
-            int MaxprdFile = 21;
+            string prdFile;
+            prdFile = textBox1.Text;
+            //int MaxprdFile = 20;
 
-            string prdFile = Console.WriteLine();
-            if (prdFile.Length == MaxprdFile)
+            if (prdFile != null)
             {
                 string prdFileExtension = prdFile + ".prd.enc";
-                foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
+                foreach (string file in FileUtil.GetFiles(@"F:\Estudos Programação\C#\DirRecursive\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
             }
-
+            else 
+            {
+                MessageBox.Show("Arquivo não encontrado na rede: " + prdFile);
+            }
+           
             //string prdFile = "BMCT5560990504210101";
             //string prdFileExtension = prdFile + ".prd.enc";
 
@@ -64,7 +69,7 @@ namespace DirRecursive
         {
             DateTime dateNow = DateTime.Now;
             string prd = Path.GetFileName(file);
-            string targetPath = $@"C:\DATA_ENC\{prd}";
+            string targetPath = $@"F:\Estudos Programação\C#\DirRecursive\DATA_ENC\{prd}";
             File.Copy(file, targetPath);
 
             if (file != null)
@@ -72,7 +77,7 @@ namespace DirRecursive
                 
                 //MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
 
-                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\DATA_ENC\Log\" + "FileTransfer_" + dateNow.ToString("ddMMyyyy") + ".txt", true);
+                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"F:\Estudos Programação\C#\DirRecursive\Log\" + "FileTransfer_" + dateNow.ToString("ddMMyyyy") + ".txt", true);
                 string dataImport = file + " - Arquivo encontrado e copiado às " + dateNow.ToString("HH:mm:ss");
                 string savedPathFiles = String.Format(dataImport);
                 logFiles.WriteLine(savedPathFiles);
@@ -80,6 +85,7 @@ namespace DirRecursive
                 logFiles.Close();
 
                 listBox1.Items.Add(file);
+                textBox1.Clear();
             }
         }
 
