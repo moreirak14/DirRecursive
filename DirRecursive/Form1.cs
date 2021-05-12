@@ -30,15 +30,6 @@ namespace DirRecursive
                 string prdFileExtension = prdFile + ".prd.enc";
                 foreach (string file in FileUtil.GetFiles(@"F:\Estudos Programação\C#\DirRecursive\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
             }
-            else 
-            {
-                MessageBox.Show("Arquivo não encontrado na rede: " + prdFile);
-            }
-           
-            //string prdFile = "BMCT5560990504210101";
-            //string prdFileExtension = prdFile + ".prd.enc";
-
-            //foreach (var file in FileUtil.GetFiles(@"A:\UPP_HOMOLOG\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
         }
         public static class FileUtil
         {
@@ -74,7 +65,6 @@ namespace DirRecursive
 
             if (file != null)
             {
-                
                 //MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
 
                 System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"F:\Estudos Programação\C#\DirRecursive\Log\" + "FileTransfer_" + dateNow.ToString("ddMMyyyy") + ".txt", true);
@@ -86,6 +76,10 @@ namespace DirRecursive
 
                 listBox1.Items.Add(file);
                 textBox1.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Arquivo não encontrado na rede: " + prd);
             }
         }
 
