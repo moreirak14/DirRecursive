@@ -22,17 +22,16 @@ namespace DirRecursive
         {
             string prdFile; prdFile = textBox1.Text;
             int minprdFile = 16;
-            int maxnprdFile = 20;
 
-            if (prdFile != null && prdFile.Length >= minprdFile || prdFile.Length <= maxnprdFile)
+            if (prdFile.Length >= minprdFile)
             {
                 string prdFileExtension = prdFile + ".prd.enc";
                 foreach (string file in FileUtil.GetFiles(@"U:\PAYMENT\", prdFileExtension)) WriteLine(file);
             }
-            else
+            /*else
             {
                 MessageBox.Show("Arquivo não encontrado na rede: " + prdFile);
-            }
+            }*/
         }
         public static class FileUtil
         {
