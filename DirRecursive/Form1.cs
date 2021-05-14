@@ -20,15 +20,18 @@ namespace DirRecursive
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            string prdFile; prdFile = textBox1.Text;
+            int minprdFile = 16;
+            int maxnprdFile = 20;
 
-            string prdFile;
-            prdFile = textBox1.Text;
-            //int MaxprdFile = 20;
-
-            if (prdFile != null)
+            if (prdFile != null && prdFile.Length >= minprdFile || prdFile.Length <= maxnprdFile)
             {
                 string prdFileExtension = prdFile + ".prd.enc";
-                foreach (string file in FileUtil.GetFiles(@"F:\Estudos Programação\C#\DirRecursive\prd_upp\PAYMENT\", prdFileExtension)) WriteLine(file);
+                foreach (string file in FileUtil.GetFiles(@"U:\PAYMENT\", prdFileExtension)) WriteLine(file);
+            }
+            else
+            {
+                MessageBox.Show("Arquivo não encontrado na rede: " + prdFile);
             }
         }
         public static class FileUtil
@@ -60,14 +63,14 @@ namespace DirRecursive
         {
             DateTime dateNow = DateTime.Now;
             string prd = Path.GetFileName(file);
-            string targetPath = $@"F:\Estudos Programação\C#\DirRecursive\DATA_ENC\{prd}";
+            string targetPath = $@"C:\DATA_ENC\{prd}";
             File.Copy(file, targetPath);
 
             if (file != null)
             {
                 //MessageBox.Show($"Arquivo {prd} Copiado com sucesso \npara {targetPath}");
 
-                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"F:\Estudos Programação\C#\DirRecursive\Log\" + "FileTransfer_" + dateNow.ToString("ddMMyyyy") + ".txt", true);
+                System.IO.StreamWriter logFiles = new System.IO.StreamWriter(@"C:\UPP\CopyProductionFileMX0000\Log\" + "FileTransfer_" + dateNow.ToString("ddMMyyyy") + ".txt", true);
                 string dataImport = file + " - Arquivo encontrado e copiado às " + dateNow.ToString("HH:mm:ss");
                 string savedPathFiles = String.Format(dataImport);
                 logFiles.WriteLine(savedPathFiles);
@@ -76,10 +79,6 @@ namespace DirRecursive
 
                 listBox1.Items.Add(file);
                 textBox1.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Arquivo não encontrado na rede: " + prd);
             }
         }
 
